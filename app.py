@@ -16,6 +16,8 @@ def predict():
     img_bytes = np.frombuffer(file.read(), np.uint8)
     img = cv2.imdecode(img_bytes, cv2.IMREAD_COLOR)
 
+    img = cv2.resize(src = img, dsize = (416, 416))
+
     results = model.predict(source=img, conf=0.5)
     detected_classes = [model.names[int(cls)] for cls in results[0].boxes.cls]
 
